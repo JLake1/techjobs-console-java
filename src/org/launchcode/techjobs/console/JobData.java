@@ -81,6 +81,16 @@ public class JobData {
             }
         }
 
+        /* for search by value
+
+        if row(entry) contains value:
+              if row already exists:
+                continue
+              else
+                add row
+
+         */
+
         return jobs;
     }
 
