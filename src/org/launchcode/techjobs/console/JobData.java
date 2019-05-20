@@ -7,7 +7,9 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -76,24 +78,52 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            String lowerA = aValue.toLowerCase();
+            String lowerVal = value.toLowerCase();
+
+
+            if (lowerA.contains(lowerVal)) {
                 jobs.add(row);
             }
         }
 
-        /* for search by value
-
-        if row(entry) contains value:
-              if row already exists:
-                continue
-              else
-                add row
-
-         */
+        if (jobs.equals("")) {
+            System.out.println("No results found. Please search again.");
+        }
 
         return jobs;
     }
 
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+
+            for (String i : row.values()) {
+
+                String lowerStr = i.toLowerCase();
+                String lowerVal = value.toLowerCase();
+
+
+                if (lowerStr.contains(lowerVal)){
+
+                    jobs.add(row);
+                    break;
+                }
+            }
+
+        }
+
+        if (!jobs.equals("")) {
+            System.out.println("No results found. Please search again.");
+        }
+
+        return jobs;
+    }
     /**
      * Read in data from a CSV file and store it in a list
      */
