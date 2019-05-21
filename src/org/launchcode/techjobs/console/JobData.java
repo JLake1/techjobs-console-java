@@ -87,7 +87,8 @@ public class JobData {
             }
         }
 
-        if (jobs.equals("")) {
+
+        if (jobs.isEmpty()) {
             System.out.println("No results found. Please search again.");
         }
 
@@ -118,9 +119,10 @@ public class JobData {
 
         }
 
-        if (!jobs.equals("")) {
+        if (jobs.isEmpty()) {
             System.out.println("No results found. Please search again.");
         }
+
 
         return jobs;
     }
